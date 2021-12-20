@@ -1,3 +1,4 @@
+#pragma once
 struct Sentence *readSentence();
 struct Text *readText();
 struct Word *readWord();

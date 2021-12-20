@@ -1,3 +1,4 @@
+#pragma once
 void removingSentence(struct Sentence sent);
 void freeSentence(struct Sentence sent);
 void freeText(struct Text *text);

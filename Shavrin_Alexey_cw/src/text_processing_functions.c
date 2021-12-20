@@ -20,7 +20,6 @@ void freeText(struct Text *text){
 	}
 	free(text -> sents);	//cleaning memory
 	text -> sents = NULL;
-	text -> size = 0;
 	text -> count_s = 0;
 
 }
@@ -135,26 +134,16 @@ void replaceSymbol(struct Text *text){
 						size += 8;
 						new_word = realloc(new_word, size*sizeof(wchar_t));
 						if (word -> wchars[i] == L'%'){
-							new_word[j++] = L'<';
-							new_word[j++] = L'p';
-							new_word[j++] = L'r';
-							new_word[j++] = L'e';
-							new_word[j++] = L'c';
-							new_word[j++] = L'e';
-							new_word[j++] = L'n';
-							new_word[j++] = L't';
-							new_word[j++] = L'>';
+							wchar_t prec[] = L"<precent>\0";
+							for (int k = 0; prec[k]; k++){
+								new_word[j++] = prec[k];
+							}
 						}
 						if (word -> wchars[i] == L'#'){
-							new_word[j++] = L'<';
-							new_word[j++] = L'р';
-							new_word[j++] = L'е';
-							new_word[j++] = L'ш';
-							new_word[j++] = L'ё';
-							new_word[j++] = L'т';
-							new_word[j++] = L'к';
-							new_word[j++] = L'а';
-							new_word[j++] = L'>';
+							wchar_t resh[] = L"<решётка>\0";
+							for (int k = 0; resh[k]; k++){
+								new_word[j++] = resh[k];
+							}
 						}
 					}
 					else{

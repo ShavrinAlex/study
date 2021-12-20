@@ -15,7 +15,6 @@ int main(){
 	t = readText();
 	if (t == NULL){
 		wprintf(L"Возникла ошибка выделения памяти. Введенный вами текст слишком большой.\n");
-		return 0;	
 	}
 	else{
 		*text = *t;

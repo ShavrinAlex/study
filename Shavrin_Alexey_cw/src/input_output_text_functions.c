@@ -35,7 +35,7 @@ struct Word *readWord(){
 		}
 		word[count_c] = L'\0';
 		sep = wchar;
-		return &(struct Word){word, sep, size, count_c};	//casting to type struct Word
+		return &(struct Word){word, sep, count_c};	//casting to type struct Word
 	}
 	free(temp);
 	return NULL;
@@ -53,7 +53,7 @@ struct Sentence *readSentence(){
 		do{	
 			cn = readWord();
 			if (cn == NULL){	//checking memory allocation
-				freeSentence((struct Sentence){sent, size, count_w});	//cleaning memory
+				freeSentence((struct Sentence){sent, count_w});	//cleaning memory
 				return NULL;
 			}
 			*ww = *cn;
@@ -64,13 +64,13 @@ struct Sentence *readSentence(){
 				if (temp != NULL)	//checking memory allocation
 					sent = temp;
 				else{
-					freeSentence((struct Sentence){sent, size, count_w});	//cleaning memory
+					freeSentence((struct Sentence){sent, count_w});	//cleaning memory
 					return NULL;
 				}
 			}
 		}while (!wcschr(SENTS_SEPARATORS, ww->sep));
 		free(ww);	//cleaning memory
-		return &(struct Sentence){sent, size, count_w};	//casting to type struct Sentence
+		return &(struct Sentence){sent, count_w};	//casting to type struct Sentence
 	}
 	return NULL;
 }
@@ -87,7 +87,7 @@ struct Text *readText(){
 		do{
 			cn = readSentence();
 			if (cn == NULL){	//checking memory allocation
-				freeText(&(struct Text){txt, size, count_s});	//cleaning memory
+				freeText(&(struct Text){txt, count_s});	//cleaning memory
 				return NULL;
 			}
 			*sent = *cn;
@@ -104,7 +104,7 @@ struct Text *readText(){
 					txt = temp;
 				}
 				else{
-					freeText(&(struct Text){txt, size, count_s});	//cleaning memory
+					freeText(&(struct Text){txt, count_s});	//cleaning memory
 					return NULL;
 				}
 			}
@@ -113,7 +113,7 @@ struct Text *readText(){
 		if ((sent->wwords[sent->count_w - 1].sep) == L'\n')
 			(sent->wwords[sent->count_w - 1].sep) = L'.';	//adding a dot to an unfinished sentence
 		free(sent);	//cleaning memory
-		return &(struct Text){txt, size, count_s};
+		return &(struct Text){txt, count_s};
 	}
 	return NULL;
 }
@@ -145,7 +145,6 @@ void userChoice(struct Text *text){
 		switch (choice[0]){
 			case L'1':
 				sumSec(text);
-				//printText(text);
 				break;
 			case L'2':
 				wprintf(L"Результат сортировки:\n");
